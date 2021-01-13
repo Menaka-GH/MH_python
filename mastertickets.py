@@ -1,4 +1,4 @@
-
+TICKET_PRICE = 10
 tickets_remaining = 100 
 #run this code continuously until we run out of tickets
 while tickets_remaining >= 1:
