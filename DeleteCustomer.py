@@ -3,32 +3,15 @@ from tkinter import *
 from tkinter import messagebox
 import pyodbc
 
-# Add your own database name and password here to reflect in the code
-#mypass = "root"
-#mydatabase="db"
-
-con = pyodbc.connect('Driver={SQL Server};'
-                          'Server=LAPTOP-E87J5PNF\SQLEXPRESS;'
-                          'Database=BikeStores;'
-                          'Trusted_Connection=yes;')
-
-
-cur = con.cursor()
-# Enter Table Names here
-orders = "BikeStores.sales.orders"
-customers = "BikeStores.sales.customers" #customersTable
 
 
 def deleteCustomer():
     
-    customerid = customer_id.get()
-    
-    deleteSql = "delete from "+customers+" where customer_id = '"+customerid+"'"
-    deleteOrders = "delete from "+orders+" where customer_id = '"+customerid+"'"
+    ID = customer_id.get()
+    CUSTOMERS = "BikeStores.dbo.CUSTOMERS"
+    deleteSql = "delete from "+CUSTOMERS+" where ID = '"+ID+"'"
     try:
         cur.execute(deleteSql)
-        con.commit()
-        cur.execute(deleteOrders)
         con.commit()
         messagebox.showinfo('Success',"Customer Record Deleted Successfully")
     except:
@@ -36,14 +19,21 @@ def deleteCustomer():
     
 
 
-
+    print(ID)
     customer_id.delete(0, END)
     root.destroy()
-    return customerid
+    
 def delete(): 
     
-    global customer_id,first_name,last_name,phone,email,street, city, state, zip_code,Canvas1,con,cur,customers,root
-    
+    global customer_id,name,age,address,salary,Canvas1,con,cur,CUSTOMERS,root
+    con = pyodbc.connect('Driver={SQL Server};'
+                          'Server=LAPTOP-E87J5PNF\SQLEXPRESS;'
+                          'Database=BikeStores;'
+                          'Trusted_Connection=yes;')
+
+
+    cur = con.cursor()
+    CUSTOMERS = "BikeStores.dbo.CUSTOMERS"
     root = Tk()
     root.title("Sales_customers")
     root.minsize(width=400,height=400)
@@ -52,10 +42,10 @@ def delete():
     
     Canvas1 = Canvas(root)
     
-    Canvas1.config(bg="#006B38")
+    Canvas1.config(bg="#006B03")
     Canvas1.pack(expand=True,fill=BOTH)
         
-    headingFrame1 = Frame(root,bg="#FFBB00",bd=5)
+    headingFrame1 = Frame(root,bg="#FFBF60",bd=5)
     headingFrame1.place(relx=0.25,rely=0.1,relwidth=0.5,relheight=0.13)
         
     headingLabel = Label(headingFrame1, text="Delete Customer", bg='black', fg='white', font=('Courier',15))

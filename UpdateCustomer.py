@@ -3,9 +3,7 @@ from tkinter import *
 from tkinter import messagebox
 import pyodbc
 
-# Add your own database name and password here to reflect in the code
-#mypass = "root"
-#mydatabase="db"
+
 
 conn = pyodbc.connect('Driver={SQL Server};'
                           'Server=LAPTOP-E87J5PNF\SQLEXPRESS;'
@@ -16,14 +14,14 @@ conn = pyodbc.connect('Driver={SQL Server};'
 cur = conn.cursor()
 
 # Enter Table Names here
-customerTable = "BikeStores.dbo.customer"  # Book Table
+customerTable = "BikeStores.dbo.CUSTOMERS"  # Book Table
 
 
 # logging.basicConfig(filename='customer.log', level=logging.DEBUG)
 def update():
-    c_id = custid.get()
-    f_name = firstname.get()
-    updateBooks = "UPDATE " + customerTable + " SET first_name = '" + f_name + "' where customer_id = '" + c_id + "'"
+    ID= custid.get()
+    NAME = name.get()
+    updateBooks = "UPDATE " + customerTable + " SET name = '" + NAME + "' where ID = '" + ID+ "'"
     try:
         cur.execute(updateBooks)
         conn.commit()
@@ -36,7 +34,7 @@ def update():
     
 def updateCustomer():
     
-    global updateBtn, labelFrame, lb1, quitBtn, root, Canvas1, custid,firstname, conn
+    global updateBtn, labelFrame, lb1, quitBtn, root, Canvas1, custid,name, conn
     
     root = Tk()
     root.title("Customers")
@@ -44,10 +42,10 @@ def updateCustomer():
     root.geometry("600x500")
     
     Canvas1 = Canvas(root)
-    Canvas1.config(bg="#D6ED17")
+    Canvas1.config(bg="#D6ED99")
     Canvas1.pack(expand=True,fill=BOTH)
 
-    headingFrame1 = Frame(root,bg="#FFBB00",bd=5)
+    headingFrame1 = Frame(root,bg="#FBBB55",bd=5)
     headingFrame1.place(relx=0.25,rely=0.1,relwidth=0.5,relheight=0.13)
         
     headingLabel = Label(headingFrame1, text="Update Customers", bg='black', fg='white', font=('Courier',15))
@@ -63,11 +61,11 @@ def updateCustomer():
     custid = Entry(labelFrame)
     custid.place(x=100, y=30, relwidth=0.3, relheight=0.09)
     # first name
-    lb2 = Label(labelFrame, text="First Name : ", bg='black', fg='white')
-    lb2.place(x=200, y=30, relheight=0.28)
+    lb2 = Label(labelFrame, text="Name : ", bg='black', fg='white')
+    lb2.place(x=120, y=120, relheight=0.28)
 
-    firstname = Entry(labelFrame)
-    firstname.place(x=400, y=30, relwidth=0.3, relheight=0.09)
+    name = Entry(labelFrame)
+    name.place(x=200, y=130, relwidth=0.3, relheight=0.09)
 
     
     #update Button

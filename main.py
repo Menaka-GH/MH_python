@@ -16,7 +16,7 @@ root = Tk()
 root.title("Sales")
 root.minsize(width=400,height=800)
 root.geometry("600x500")
-headingFrame1 = Frame(root,bg="#FFBB00",bd=5)
+headingFrame1 = Frame(root,bg="#BFBB00",bd=5)
 headingFrame1.place(relx=0.2,rely=0.1,relwidth=0.6,relheight=0.16)
 
 headingLabel = Label(headingFrame1, text="Welcome to \n Customers Database System", bg='black', fg='white', font=('Courier',15))
